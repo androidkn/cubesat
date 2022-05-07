@@ -24,6 +24,7 @@ while True:
     (q_w, q_x, q_y, q_z) = sensor.quaternion    
     if (abs(q_x) < threOrien and abs(q_y) < threOrien):
         print("Facing downwards")
+        # TAKE PHOTO CODE HERE
     else:
         print(" ")
     time.sleep(0.5)

@@ -32,7 +32,7 @@ try:
   lightblue.obex.sendfile( target_address, service[1], file_to_send )  
   print ("completed!\n")
 except:  
-  print "an error occurred while sending file\n" 
+  print ("an error occurred while sending file\n" )
 
 #http://recolog.blogspot.com/2013/07/transferring-files-via-bluetooth-using.html
 
