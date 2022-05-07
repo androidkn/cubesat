@@ -31,7 +31,7 @@ def findType(percent):
         return 'PLASTIC'
     
 for imgName in imageList:
-    image = cv.imread('images/' + imgName)
+    image = cv.imread('test-images/' + imgName)
     #cv.imshow(imgName, image)
     hsvImage = cv.cvtColor(image, cv.COLOR_BGR2HSV)
     #cv.imshow(imgName, hsvImage)
