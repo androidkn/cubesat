@@ -1,4 +1,6 @@
-#!/usr/bin/python3
+import imu
+import bluetooth
+import imgrec
 
 #import libraries
 import numpy as np
@@ -24,22 +26,8 @@ threOrien = float(0.07)
 startX = float(0.0)
 startY = float(0.0)
 
-
-#bonus: function for uploading image to Github
-def git_push():
-    try:
-        repo = Repo('/androidkn/cubesat')
-        #PATH TO YOUR GITHUB REPO
-        repo.git.add('/pi-images')
-        #PATH TO YOUR IMAGES FOLDER WITHIN YOUR GITHUB REPO
-        repo.index.commit('New Photo')
-        print('made the commit')
-        origin = repo.remote('origin')
-        print('added remote')
-        origin.push()
-        print('pushed changes')
-    except:
-        print('Couldn\'t upload to git')
+hsvThresholds = [90,120,0,255,0,255]
+waterThresholds = [20,94,99]
 
 while True:
     (q_w, q_x, q_y, q_z) = sensor.quaternion    
@@ -52,21 +40,22 @@ while True:
     
     if (abs(q_x) < threOrien and abs(q_y) < threOrien):
         print("Facing downwards")
-        # TAKE PHOTO CODE HERE
 
+        # TAKE PHOTO
         np_array = picam2.capture_array()
         print(np_array)
-
-        name = "FlatEarthers"     #Last Name, First Initial  ex. FoxJ
+        name = "FlatEarthers" #EDIT NAMING OF ALL IMAGES
         if name:
             t = time.strftime("_%H%M%S")      # current time string
-            imgname = ('/home/pi/Cubesat/Images/%s%s' % (name,t))
+            imgName = ('/home/pi/Cubesat/Images/%s%s' % (name,t))
+        picam2.capture_file(imgName)
 
-        picam2.capture_file(imgname)
-        
+        # PROCESS IMAGE
+        analysis = imgrec.processImage(imgName, hsvThresholds, waterThresholds)
+        if analysis[1] == 'PLASTIC':
+            i = 1
+            # SEND PHOTO
     else:
         print(" ")
+    
     time.sleep(0.5)
-    # print("%u %u %u " % (oriX, oriY, oriZ))
-
-picam2.stop()
