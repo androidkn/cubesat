@@ -25,27 +25,18 @@ class ImgRec:
         else:
             return 'PLASTIC'
     
-    def processImages(self, imageList, hsvThresholds, waterThresholds):
-        results = []
-    
+
+    def processImage(self, image, hsvThresholds, waterThresholds):
         lowH = hsvThresholds[0]
         highH = hsvThresholds[1]
         lowS = hsvThresholds[2]
         highS = hsvThresholds[3]
         lowV = hsvThresholds[4]
         highV = hsvThresholds[5]
-    
-        for imgName in imageList:
-            #image = cv.imread('pi-images/learning_photos/shoe2/' + imgName)
-            ##cv.imshow(imgName, image)
-            #hsvImage = cv.cvtColor(image, cv.COLOR_BGR2HSV)
-            ##cv.imshow(imgName, hsvImage)
-            #filter = cv.inRange(hsvImage, (lowH, lowS, lowV), (highH, highS, highV))
-            #cv.imshow(imgName, filter)
-            #percent = percentWater(filter)
-            image = cv.imread(directory + imgName)
-            image_small = cv.resize(origImage, (1333,1000))
-            result = processImage(image_small, hsvThresholds, waterThresholds)
-            results.append(result)
         
-        return results
+        hsvImage = cv.cvtColor(image, cv.COLOR_BGR2HSV)
+        filter = cv.inRange(hsvImage, (lowH, lowS, lowV), (highH, highS, highV))
+        percent = self.percentWater(filter)
+        result = [self.findType(percent, waterThresholds), percent, filter]
+        #print(' is most likely ' + str(self.findType(percent, waterThresholds)) + ' with ' + str(percent) + "% water found")
+        return result
