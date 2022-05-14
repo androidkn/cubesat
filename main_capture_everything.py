@@ -49,7 +49,7 @@ while True:
     time.sleep(2)
     (q_w, q_x, q_y, q_z) = sensor.quaternion    
     
-    if (abs(q_x) < threOrien and abs(q_y) < threOrien):
+    if True: # Always facing down (abs(q_x) < threOrien and abs(q_y) < threOrien):
         print("Facing downwards")
 
         # TAKE PHOTO
@@ -65,8 +65,8 @@ while True:
         result = imgrec.processImage(image = image, hsvThresholds = hsvThresholds, waterThresholds = waterThresholds)
         print(result)
         
-        if result[0] != 'PLASTIC':
-            continue
+        # Disable water check if result[0] != 'PLASTIC':
+        # Disable water check     continue
         
         # Save Image
         t = time.strftime("_%H:%M:%S")    # current time string
