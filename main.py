@@ -31,8 +31,8 @@ startX = float(0.0)
 startY = float(0.0)
 
 # EDIT THESE to tune model
-hsvThresholds = [90,120,0,255,0,255]
-waterThresholds = [20,94,99]
+hsvThresholds = imgrec.getHSVThresholds()
+waterThresholds = imgrec.getWaterThresholds()
 
 while True:
     (q_w, q_x, q_y, q_z) = sensor.quaternion    

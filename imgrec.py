@@ -15,14 +15,19 @@ imageList = [
     'demo0010.jpg'
 ]
 
-directory = 'pi-images/learning_photos/shoe2/'
+directory = 'learning_photos/shoe2/'
 
 hsvThresholdsHere = [0, 66, 60, 255, 0, 255]
-waterThresholdsHere = [20,94,99]
+waterThresholdsHere = [20,70,97]
+
+def getHSVThresholds():
+    return hsvThresholdsHere
+def getWaterThresholds():
+    return waterThresholdsHere
 
 def percentWater(filter):
-    waterPixels = np.sum(filter == 255)
-    nonWaterPixels = np.sum(filter == 0)
+    waterPixels = np.sum(filter == 0)
+    nonWaterPixels = np.sum(filter == 255)
     waterPercent = round((100*waterPixels)/(waterPixels + nonWaterPixels), 3)
     return waterPercent
 
