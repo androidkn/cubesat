@@ -46,11 +46,13 @@ while True:
         name = "" #EDIT NAMING OF ALL IMAGES
         if name:
             t = time.strftime("_%H%M%S")    # current time string
-            imgName = ('/home/pi/Cubesat/Images/%s%s' % (name,t))
+            imgName = ('/home/pi/cubesat/pi-images/%s%s' % (name,t))
+            print(imgName)
         picam2.capture_file(imgName)
 
         # PROCESS IMAGE
         analysis = imgrec.processImage(imgName, hsvThresholds, waterThresholds)
+
         if analysis[1] == 'PLASTIC':
             i = 1 # DELETE THIS LATER
 
@@ -60,4 +62,4 @@ while True:
     else:
         print(" ")
     
-    time.sleep(0.5)
+    time.sleep(2)
