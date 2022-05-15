@@ -6,7 +6,7 @@ imgrec = imgrec.ImgRec()
 
 org = (50,50)
 
-directory = 'pi-images-demo/'
+directory = 'learning_photos/shoe2/'
 imageList = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory,f))]
 
 hsvThresholdsHere = [0, 66, 60, 255, 0, 255]
@@ -28,14 +28,14 @@ def processImages(imageList, hsvThresholds, waterThresholds):
         cv.imshow(imgName, image_small)
         result = imgrec.processImage(image_small, hsvThresholds, waterThresholds)
         cv.imshow(imgName + ' filtered', result[2])
-        print("Hello")
+        print(imgName + " displayed")
         results.append(result)
     
     cv.waitKey(600000)
     cv.destroyAllWindows()
     return results
 
-processImages([imageList[0]], hsvThresholdsHere, waterThresholdsHere)
+processImages(imageList, hsvThresholdsHere, waterThresholdsHere)
 
 while True:
     # quit if 'q' is pressed
