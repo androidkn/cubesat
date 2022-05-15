@@ -74,13 +74,6 @@ while True:
         print('Saving image to ' + imgName)
         cv2.imwrite(imgName, image)
 
-        #if analysis[1] == 'PLASTIC':
-        #    i = 1 # DELETE THIS LATER
-
-            # SEND PHOTO
-            ## BLUETOOTH CODE HERE
-
-
     else:
         print("Not facing downwards")
     
